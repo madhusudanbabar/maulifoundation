@@ -1,0 +1,23 @@
+%title {
+  font-size: 5rem;
+  position: relative;
+  margin-block: 7.5rem 15rem;
+  margin-inline: 1rem;
+
+  &::after {
+    content: "";
+    display: block;
+    height: 0.5rem;
+    width: 0ch;
+    background: $color-secondary;
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transition: width 0.3s ease-in-out;
+    transform: translateX(-50%);
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+}

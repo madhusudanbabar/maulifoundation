@@ -1,0 +1,85 @@
+@mixin respond($breakpoint) {
+  @if $breakpoint == tab-port {
+    @media screen and (min-width: 37.5em) {
+      @content;
+    }
+  }
+  @if $breakpoint == tab-land {
+    @media screen and (min-width: 56.5em) {
+      @content;
+    }
+  }
+  @if $breakpoint == desktop {
+    @media screen and (min-width: 75em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == hi-res {
+    @media screen and (min-width: 93.75em) {
+      @content;
+    }
+  }
+}
+
+@mixin font-size($min, $max, $preferred: 7.5vw) {
+  font-size: clamp($min, $preferred, $max);
+}
+
+@mixin width($min, $max, $preferred: 50ch) {
+  width: clamp($min, $preferred, $max);
+}
+
+@mixin watermark {
+  --font-size: 5.5rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 700;
+  font-size: var(--font-size);
+  line-height: 6rem;
+  color: $gray-lighter;
+  align-self: center;
+  position: relative;
+
+  &::before {
+    content: attr(data-title);
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    font-size: calc(2 * var(--font-size));
+    @supports (-webkit-text-stroke: white 1px) {
+      color: transparent;
+      -webkit-text-stroke: transparentize($color: $subtle-peach, $amount: 0.9)
+        0.25rem;
+    }
+
+    @include respond(desktop) {
+      --font-size: 7.5rem;
+    }
+  }
+}
+
+@mixin mask {
+  mask-image: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.01) 8.1%,
+    rgba(0, 0, 0, 0.05) 15.5%,
+    rgba(0, 0, 0, 0.11) 22.5%,
+    rgba(0, 0, 0, 0.18) 29%,
+    rgba(0, 0, 0, 0.26) 35.3%,
+    rgba(0, 0, 0, 0.35) 41.2%,
+    rgba(0, 0, 0, 0.45) 47.1%,
+    rgba(0, 0, 0, 0.55) 52.9%,
+    rgba(0, 0, 0, 0.65) 58.8%,
+    rgba(0, 0, 0, 0.74) 64.7%,
+    rgba(0, 0, 0, 0.82) 71%,
+    rgba(0, 0, 0, 0.89) 77.5%,
+    rgba(0, 0, 0, 0.95) 84.5%,
+    rgba(0, 0, 0, 0.99) 91.9%,
+    #000 100%
+  );
+  mask-mode: alpha;
+}

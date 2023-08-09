@@ -1,0 +1,53 @@
+.title {
+  // text-transform: uppercase;
+  color: $color-secondary;
+  font-size: 3rem;
+  font-weight: 700;
+  padding: 2rem 0;
+  font-family: var(--title-font);
+  text-align: center;
+}
+
+.heading {
+  font-size: 5rem;
+  color: white;
+  font-family: var(--title-font);
+  text-align: center;
+  font-weight: 500;
+}
+
+.cta {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  background: $color-secondary;
+  color: white;
+  border-radius: 0.5rem;
+  border: none;
+  text-decoration: none;
+  margin: 1rem;
+  transition: all 0.3s ease-in;
+
+  &__outline {
+    background: transparentize($color: $color-secondary, $amount: 0.85);
+    border: solid 1px $subtle-peach;
+    color: $subtle-peach;
+
+    &[disabled]:not([disabled="false"]) {
+      background: $gray;
+      cursor: disabled;
+      color: $red-light;
+      border: none;
+    }
+
+    &:hover {
+      background: $subtle-peach;
+      color: $color-secondary;
+    }
+  }
+
+  &:hover,
+  &:active {
+    transform: translateY(0.1rem);
+    box-shadow: 0 0.5rem 1rem 0 transparentize($color: #333, $amount: 0.5);
+  }
+}
