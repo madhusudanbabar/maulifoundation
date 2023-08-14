@@ -24,7 +24,7 @@ export default defineNuxtConfig({
     },
   },
   build: {
-    transpile: ["@fortawesome/vue-fontawesome"],
+    transpile: ["@fortawesome/vue-fontawesome", "gsap"],
     babel: {
       compact: true,
     },

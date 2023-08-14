@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div class="container-fluid">
+    <section class="container-fluid">
       <div class="hero">
         <div class="hero__meta">
           <h1 class="hero__title">Empowering Lives, Restoring Hope</h1>
@@ -25,11 +25,11 @@
           />
         </figure>
       </div>
-    </div>
-    <div class="container-fluid">
+    </section>
+    <section class="container-fluid">
       <div class="bio">
         <div class="bio__block bio__block--about">
-          <h2 class="bio__heading">About Us:</h2>
+          <h2 class="bio__heading">About Us</h2>
           <p class="bio__desc">
             At Mauli Foundation, we are driven by the conviction that every
             person deserves dignity, respect, and the chance to rebuild their
@@ -40,7 +40,7 @@
           </p>
         </div>
         <div class="bio__block bio__block--mission">
-          <h2 class="bio__heading">Our Mission:</h2>
+          <h2 class="bio__heading">Our Mission</h2>
           <p class="bio__desc">
             Our mission is to make a lasting impact on the lives of those who
             often go unnoticed. We provide holistic support that includes access
@@ -51,132 +51,140 @@
           </p>
         </div>
       </div>
-    </div>
-    <div class="container-fluid work">
-      <h2 class="title work__title">What We Do</h2>
+    </section>
+    <section class="container-fluid work">
+      <!-- <h3 class="work__subtitle">What We Do?</h3> -->
+      <h2 class="work__title">What We Do?</h2>
       <div class="work__grid">
         <div class="work__block" v-for="w in work">
           <div class="work__row">
             <font-awesome-icon class="work__icon" :icon="['fas', w.icon]" />
-            <h3 class="work__heading">{{ w.title }}</h3>
+            <span class="work__heading">{{ w.title }}</span>
           </div>
           <p class="work__meta">{{ w.description }}</p>
         </div>
       </div>
-    </div>
-    <div class="container-fluid">
-      <div class="contact">
-        <div class="contact__left">
-          <h2 class="contact__heading">Contact Us</h2>
-          <p class="contact__meta">
-            If you would like to know more about our initiatives, volunteer
-            opportunities, or how you can contribute contact us at
-            <a class="contact__mail" href="mailto:contact@maulifoundation.org">
-              contact@maulifoundation.org </a
-            >. Join hands with Mauli Foundation as we work towards building a
-            more inclusive and compassionate world for all. Remember, every
-            small act of kindness counts. Together, we can be the change these
-            lives deserve.
-          </p>
-          <div class="contact__social">
-            <span class="contact__social-heading">Connect with me on: </span>
-            <div class="contact__links">
-              <nuxt-link
-                :to="social.link"
-                target="_new"
-                v-for="social in socialLinks"
-              >
-                <font-awesome-icon
-                  class="contact__icon"
-                  size="2x"
-                  :icon="['fab', social.icon]"
-                />
-              </nuxt-link>
-            </div>
+    </section>
+    <section class="container-fluid fact">
+      <div class="fact__left">
+        <div class="fact__item fact__item--main">
+          <div class="fact__count fact__count--bold" data-counter="lives">
+            50+
           </div>
-        </div>
-        <div class="contact__right">
-          <form
-            method="post"
-            ref="form"
-            class="form"
-            @submit.prevent="submitHandler"
-          >
-            <div class="form__field">
-              <input
-                name="name"
-                id="name"
-                class="form__input"
-                placeholder=" "
-              />
-              <label for="name" class="form__label">Name</label>
-            </div>
-            <div class="form__field">
-              <input
-                name="email"
-                id="email"
-                type="email"
-                class="form__input"
-                placeholder=" "
-              />
-              <label for="email" class="form__label">Email</label>
-            </div>
-            <div class="form__field">
-              <textarea
-                name="message"
-                id="message"
-                rows="5"
-                placeholder=" "
-                class="form__input"
-              />
-              <label class="form__label" for="message">Message</label>
-            </div>
-            <button type="submit" class="cta form__cta">Submit</button>
-          </form>
+          <span class="fact__desc fact__desc--bold">Lives Transformed</span>
         </div>
       </div>
-    </div>
-    <div class="container-fluid footer">
-      <h3 class="footer__note">
-        Crafted with <span class="footer__emoji">💖</span> by krypton
-        <span class="footer__emoji">👨‍💻</span>
-      </h3>
-    </div>
+      <div class="fact__right">
+        <div class="fact__item">
+          <div class="fact__count" data-counter="years">1+</div>
+          <span class="fact__desc">Years of Service</span>
+        </div>
+        <div class="fact__item">
+          <div class="fact__count" data-counter="meals">200+</div>
+          <span class="fact__desc">Meals Served</span>
+        </div>
+        <div class="fact__item">
+          <div class="fact__count" data-counter="stories">10+</div>
+          <span class="fact__desc">Success Stories</span>
+        </div>
+        <div class="fact__item">
+          <div class="fact__count" data-counter="volunteers">15+</div>
+          <span class="fact__desc">Volunteer Impact</span>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 <script>
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 export default {
   setup() {
-    {
-      const work = [
-        {
-          title: "Food, Shelter & Care",
-          description:
-            "We offer safe and clean shelter spaces where individuals can find refuge from the streets, along with access to proper healthcare and mental health support.",
-          icon: "home",
-        },
-        {
-          title: "Mental Health Empowerment",
-          description:
-            "Our team of dedicated professionals provides counseling, therapy, and workshops to help individuals cope with their mental health challenges and regain control over their lives.",
-          icon: "heart",
-        },
-        // {
-        //   title: "Education and Skill Building",
-        //   description:
-        //     "We believe in the power of education to break the cycle of poverty. We provide educational opportunities and skill development programs that equip individuals with tools to build a brighter future.",
-        //   icon: "graduation-cap",
-        // },
-        {
-          title: "Community & Support",
-          description:
-            "Through a strong sense of community, we foster an environment where everyone feels valued and understood. We organize support groups and activities to build connections and combat loneliness.",
-          icon: "users",
-        },
-      ];
+    const work = [
+      {
+        title: "Food, Shelter & Care",
+        description:
+          "Offer safe & clean shelter spaces where individuals can find refuge from the streets, along with access to proper healthcare & mental health support.",
+        icon: "home",
+      },
+      {
+        title: "Mental Health Empowerment",
+        description:
+          "Our team provides counseling & workshops to help individuals cope with their mental health challenges & regain control over their lives.",
+        icon: "heart",
+      },
+      // {
+      //   title: "Education and Skill Building",
+      //   description:
+      //     "We believe in the power of education to break the cycle of poverty. We provide educational opportunities and skill development programs that equip individuals with tools to build a brighter future.",
+      //   icon: "graduation-cap",
+      // },
+      {
+        title: "Empowerment Workshops",
+        description:
+          "Engaging workshops on various life skills empower individuals to gain confidence and make positive changes in their lives.",
+        icon: "hands-helping",
+      },
+      {
+        title: "Community & Support",
+        description:
+          "Through a strong sense of community, we foster an environment where everyone feels valued & understood. our support groups & activities helps build connections & combat loneliness.",
+        icon: "users",
+      },
+      {
+        title: "Visits by Prominent Persons",
+        description:
+          "Prominent figures such as police officers, local officials, and community leaders visit to show support, inspire, and engage with the residents.",
+        icon: "user-tie",
+      },
+      {
+        title: "Healthy Food",
+        description:
+          "Nutritious meals are provided to promote physical well-being and ensure that individuals have access to healthy, balanced diets.",
+        icon: "apple-alt",
+      },
+    ];
 
-      return { work };
-    }
+    const counterItems = {
+      years: 1,
+      meals: 200,
+      stories: 10,
+      volunteers: 15,
+      lives: 50,
+    };
+    let ctx;
+    return { work, counterItems, ctx };
+  },
+  methods: {
+    animateCounters() {
+      const counterElements = document.querySelectorAll("[data-counter]");
+      counterElements.forEach((element) => {
+        let counterName = element.getAttribute("data-counter");
+        let targetValue = this.counterItems[counterName];
+        let counter = { value: 0 };
+
+        gsap.to(counter, {
+          value: targetValue,
+          scrollTrigger: ".fact__right",
+          duration: 1,
+          stagger: 0.1,
+          roundProps: "value",
+          onUpdate: () => (element.textContent = counter.value + "+"),
+        });
+      });
+    },
+  },
+  mounted() {
+    this.animateCounters();
+  },
+  beforeUnmount() {
+    this.ctx.revert();
+    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    ScrollTrigger.killAll();
+    this.ctx.kill();
   },
 };
 </script>
@@ -201,7 +209,8 @@ export default {
 
     @include respond(desktop) {
       padding: 2rem 10rem;
-      padding-right: 0;
+      flex: 0 0 55%;
+      // padding-right: 0;
     }
   }
 
@@ -221,18 +230,15 @@ export default {
   }
 
   &__figure {
-    min-height: 100%;
-    mask-image: url("/images/splash.png");
-    mask-size: cover;
-    mask-position: 0 50%;
-    align-self: stretch;
-    max-height: 100vh;
+    height: 100%;
+    width: 100%;
+    max-height: 100vmin;
+    overflow: hidden;
   }
 
   &__img {
     height: 100%;
     width: 100%;
-    display: block;
     object-fit: cover;
   }
 }
@@ -245,8 +251,9 @@ export default {
 .bio {
   display: flex;
   gap: 2.5rem;
-  max-width: 110rem;
+  max-width: 115rem;
   flex-direction: column;
+  justify-content: space-between;
 
   @include respond(desktop) {
     margin: 0 auto;
@@ -260,7 +267,7 @@ export default {
     color: #e9ddd3;
     padding: clamp(2rem, 7.5vmax, 5rem);
     padding-inline: 0rem;
-    width: clamp(30rem, 100%, 55rem);
+    width: clamp(30rem, 100%, 50rem);
   }
 
   &__heading {
@@ -275,7 +282,7 @@ export default {
   &__desc {
     font-family: Inter;
     font-size: 1.65rem;
-    line-height: 1.5;
+    line-height: 1.65;
     margin-bottom: 2rem;
   }
 }
@@ -283,30 +290,32 @@ export default {
 .work {
   padding: 7vh 7.5vw 10rem;
 
+  &__subtitle {
+    text-align: center;
+    font-family: var(--font-system);
+    margin-top: 7.5rem;
+    color: $red-light;
+  }
+
   &__title {
-    font-size: 5rem;
-    margin-block: 7.5rem 15rem;
-    margin-inline: auto;
-    max-width: fit-content;
-    @extend %title;
-    @include watermark;
+    font-size: 4rem;
+    text-align: center;
+    margin-block: 1rem 15rem;
+    font-family: var(--font-system);
   }
 
   &__grid {
     display: flex;
     gap: 5rem;
-    max-width: 120rem;
     flex-direction: column;
 
     @include respond(desktop) {
-      margin-inline: auto;
       flex-flow: row wrap;
       justify-content: space-around;
     }
   }
 
   &__block {
-    flex: 0 0 24%;
     min-width: 30rem;
     display: flex;
     flex-flow: column nowrap;
@@ -325,6 +334,7 @@ export default {
 
   &__row {
     display: flex;
+    flex-direction: column;
     gap: 2rem;
     align-items: center;
     justify-content: center;
@@ -346,7 +356,7 @@ export default {
     font-family: var(--font-system);
     font-size: 2.25rem;
     font-weight: 500;
-    position: relative;
+    text-align: center;
   }
 
   &__meta {
@@ -355,161 +365,68 @@ export default {
     font-weight: 400;
     line-height: 150%;
     margin-top: 1rem;
+    // text-align: center;
     hyphens: auto;
   }
 }
 
-.contact {
+.fact {
   display: flex;
-  flex-flow: column nowrap;
-  padding: 5rem 1.5rem;
-  max-width: 110rem;
-  margin-inline: auto;
+  flex-flow: column;
+  justify-content: space-around;
+  background: $violet-darker;
+  padding: 10rem;
+  align-items: center;
+  text-align: center;
+  gap: 5rem;
 
-  @include respond(desktop) {
-    flex-flow: row wrap;
-    padding-block: 12.5rem 7.5rem;
+  @include respond(tab-land) {
+    flex-flow: row nowrap;
+    gap: initial;
   }
 
-  &__left {
-    flex: 0 0 50%;
-  }
-
-  &__heading {
-    color: $color-secondary;
-    letter-spacing: 0.125rem;
-    margin-bottom: 2rem;
-    font-size: 5rem;
-    text-align: left;
-    font-family: Poppins;
-  }
-
-  &__meta {
-    line-height: 1.5;
-    width: clamp(30ch, 80%, 70rem);
-  }
-
-  &__mail {
-    color: $blue-dark-2;
-    text-decoration: none;
-  }
-
-  &__social {
+  &__item {
     display: flex;
     flex-direction: column;
-    margin-top: 2rem;
-  }
-
-  &__links {
-    display: flex;
     gap: 1rem;
-    margin-block: 0.5rem;
     align-items: center;
+    font-family: "Poppins";
   }
 
-  &__icon {
-    color: $color-secondary;
+  &__count {
+    font-family: "Poppins";
+
+    font-size: 5rem;
+    color: $yellow-dark;
+    font-weight: 700;
+
+    @include respond(tab-land) {
+      font-size: 7rem;
+    }
+
+    &--bold {
+      font-size: 10rem;
+
+      @include respond(tab-land) {
+        font-size: 15rem;
+      }
+    }
   }
 
-  &__fig {
-    width: 100%;
-    overflow: hidden;
-    display: block;
-  }
+  &__desc {
+    font-family: "Lato";
+    font-weight: 500;
+    font-size: 3rem;
 
-  &__avatar {
-    height: 100%;
-    width: 100%;
-    display: block;
-    object-fit: cover;
+    &--bold {
+      font-size: 4rem;
+    }
   }
 
   &__right {
-    flex: 0 0 50%;
-  }
-}
-
-.container-fluid:has(.contact) {
-  background: $violet-darker;
-}
-
-.form {
-  display: flex;
-  flex-flow: column;
-  gap: 3.5rem;
-  margin-top: 5rem;
-  max-width: 100%;
-
-  @include respond(desktop) {
-    margin-top: 0;
-  }
-
-  &__field {
-    position: relative;
-    --left: 2rem;
-  }
-
-  &__input {
-    font-size: 1.6rem;
-    width: 100%;
-    padding: 1rem var(--left);
-    border-radius: 0.5rem;
-    background: transparent;
-    border: 2px solid transparentize($color: $color-secondary-2, $amount: 0.5);
-    color: $red-light;
-
-    &:focus-visible {
-      outline: 2px solid
-        transparentize($color: $color-secondary-2, $amount: 0.5);
-    }
-
-    &:focus + .form__label {
-      top: -1.5rem;
-      left: 0;
-      font-size: 1.4rem;
-    }
-  }
-
-  &__label {
-    position: absolute;
-    top: 2rem;
-    transform: translateY(-50%);
-    left: var(--left);
-    font-size: 1.6rem;
-    transition: all 0.3s ease;
-    pointer-events: none;
-  }
-
-  &__input:not(:placeholder-shown) + label {
-    top: -1.5rem;
-    left: 0;
-    font-size: 1.4rem;
-  }
-
-  &__cta {
-    align-self: center;
-    background-color: $color-secondary;
-  }
-}
-
-.footer {
-  background-color: $violet-darker;
-  padding: 2rem 1.5rem;
-
-  &__note {
-    text-align: center;
-    font-size: 2rem;
-    font-family: var(--font-system);
-    font-weight: 400;
-    line-height: 1.5;
-  }
-
-  &__emoji {
-    font-size: 0.8em;
-
-    &:first-child {
-      animation: infinite sparkle 3s;
-    }
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8rem 4rem;
   }
 }
 </style>
