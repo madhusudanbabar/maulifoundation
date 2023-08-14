@@ -21,7 +21,8 @@
         <figure class="hero__figure">
           <nuxt-img
             class="hero__img"
-            src="https://source.unsplash.com/random/?orphans,beggars"
+            quality="100"
+            src="/images/gallery/happy faces.jpeg"
           />
         </figure>
       </div>
@@ -128,10 +129,10 @@
       <h2 class="gallery__title">Gallery of hope</h2>
       <div class="gallery__grid">
         <nuxt-img
+          v-for="i in gallery"
+          width="1000"
           class="gallery__img"
-          v-for="i in new Array(20)"
-          :data-id="i"
-          :src="`https://source.unsplash.com/random/?kids?sig=${Math.random()}`"
+          :src="`/images/gallery/${i}`"
         />
       </div>
     </section>
@@ -197,8 +198,27 @@ export default {
       volunteers: 15,
       lives: 50,
     };
+    const gallery = [
+      "mauli with other officials.jpeg",
+      "happy faces.jpeg",
+      "medical checkup.jpeg",
+      "mauli with police.jpeg",
+      "mauli grooming orphans.jpeg",
+      "mauli with polices.jpeg",
+      "mauli with orphans.jpeg",
+      "orphans.jpeg",
+      "police visit to mauli foundation.jpeg",
+      "smiling face.jpeg",
+      "smiling faces 2.jpeg",
+      "smiling faces.jpeg",
+      "volunteers feeding 2.jpeg",
+      "volunteers feeding 3.jpeg",
+      "volunteers feeding.jpeg",
+      "volunteers with orphan.jpeg",
+      "volunteers.jpeg",
+    ];
     let ctx;
-    return { work, counterItems, ctx };
+    return { work, gallery, counterItems, ctx };
   },
   methods: {
     animateCounters() {
@@ -250,9 +270,9 @@ export default {
     padding: 2rem;
 
     @include respond(desktop) {
-      padding: 2rem 10rem;
-      flex: 0 0 55%;
-      // padding-right: 0;
+      padding: 2rem 5rem;
+      padding-right: 2rem;
+      flex: 0 0 45%;
     }
   }
 
@@ -272,10 +292,11 @@ export default {
   }
 
   &__figure {
-    height: 100%;
-    width: 100%;
     max-height: 100vmin;
     overflow: hidden;
+    @include respond(desktop) {
+      align-self: stretch;
+    }
   }
 
   &__img {
@@ -560,7 +581,7 @@ export default {
     @include respond(desktop) {
       grid-template-columns: repeat(9, 1fr);
       display: grid;
-      grid-auto-rows: 20rem;
+      grid-auto-rows: 25rem;
     }
   }
 
@@ -610,6 +631,10 @@ export default {
       }
       &:nth-child(15),
       &:nth-child(19) {
+        grid-column: span 3;
+      }
+      &:nth-child(16) {
+        grid-row: span 1;
         grid-column: span 3;
       }
     }
