@@ -14,19 +14,15 @@
           deserve.
         </p>
         <div class="contact__social">
-          <span class="contact__social-heading">Connect with us on: </span>
+          <span class="contact__social-heading">Connect with us on:</span>
           <div class="contact__links">
-            <nuxt-link
-              :to="social.link"
-              target="_new"
-              v-for="social in socialLinks"
-            >
+            <a :href="social.to" target="_blank" v-for="social in socialLinks">
               <font-awesome-icon
                 class="contact__icon"
                 size="2x"
                 :icon="['fab', social.icon]"
               />
-            </nuxt-link>
+            </a>
           </div>
         </div>
       </div>
@@ -72,10 +68,14 @@
 
 <script setup>
 const socialLinks = [
-  //   {
-  //     to: "#",
-  //     icon: "",
-  //   },
+  {
+    to: "https://www.facebook.com/mauli.sawant.54?mibextid=ZbWKwL",
+    icon: "facebook",
+  },
+  {
+    to: "https://instagram.com/mauli_sawant_official?utm_source=qr&igshid=MzNlNGNkZWQ4Mg%3D%3D",
+    icon: "instagram",
+  },
 ];
 </script>
 
@@ -128,6 +128,10 @@ const socialLinks = [
     gap: 1rem;
     margin-block: 0.5rem;
     align-items: center;
+  }
+
+  a {
+    width: 2.5rem;
   }
 
   &__icon {
