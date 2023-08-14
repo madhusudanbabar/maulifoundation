@@ -124,6 +124,17 @@
         </div>
       </div>
     </section>
+    <section class="container-fluid gallery">
+      <h2 class="gallery__title">Gallery of hope</h2>
+      <div class="gallery__grid">
+        <nuxt-img
+          class="gallery__img"
+          v-for="i in new Array(20)"
+          :data-id="i"
+          :src="`https://source.unsplash.com/random/?kids?sig=${Math.random()}`"
+        />
+      </div>
+    </section>
   </div>
 </template>
 <script>
@@ -528,6 +539,80 @@ export default {
     margin-left: 0;
     align-self: flex-start;
     margin-top: auto;
+  }
+}
+
+.gallery {
+  background: $violet-darker;
+  padding: 7vh 7.5vw 10rem;
+
+  &__title {
+    @extend %heading;
+    margin-block: 2rem 10rem;
+  }
+
+  &__grid {
+    border-radius: 1rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    @include respond(desktop) {
+      grid-template-columns: repeat(9, 1fr);
+      display: grid;
+      grid-auto-rows: 20rem;
+    }
+  }
+
+  &__img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+
+    @include respond(desktop) {
+      &:nth-child(1),
+      &:nth-child(20) {
+        grid-column: span 4;
+      }
+      &:nth-child(2),
+      &:nth-child(6) {
+        grid-column: span 3;
+        grid-row: span 2;
+      }
+      &:nth-child(3),
+      &:nth-child(16) {
+        grid-column: span 2;
+        grid-row: span 3;
+      }
+      &:nth-child(4) {
+        grid-column: span 2;
+        grid-row: span 3;
+      }
+      &:nth-child(5),
+      &:nth-child(13),
+      &:nth-child(11) {
+        grid-column: span 2;
+      }
+      &:nth-child(7),
+      &:nth-child(10) {
+        grid-column: span 2;
+        grid-row: span 2;
+      }
+      &:nth-child(8),
+      &:nth-child(9),
+      &:nth-child(16) {
+        grid-column: span 2;
+        grid-row: span 2;
+      }
+      &:nth-child(14),
+      &:nth-child(17) {
+        grid-column: span 3;
+      }
+      &:nth-child(15),
+      &:nth-child(19) {
+        grid-column: span 3;
+      }
+    }
   }
 }
 </style>
