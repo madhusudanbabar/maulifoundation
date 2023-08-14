@@ -14,7 +14,7 @@
           deserve.
         </p>
         <div class="contact__social">
-          <span class="contact__social-heading">Connect with me on: </span>
+          <span class="contact__social-heading">Connect with us on: </span>
           <div class="contact__links">
             <nuxt-link
               :to="social.link"
@@ -63,7 +63,8 @@
   </div>
   <div class="container-fluid footer">
     <h3 class="footer__note">
-      Crafted with <span class="footer__emoji">💖</span> by krypton
+      Crafted with <span class="footer__emoji">💖</span> by
+      <a href="https://madhusudan.live" target="_blank">krypton</a>
       <span class="footer__emoji">👨‍💻</span>
     </h3>
   </div>
@@ -106,7 +107,9 @@ const socialLinks = [
 
   &__meta {
     line-height: 1.5;
-    width: clamp(30ch, 80%, 70rem);
+    @include respond(desktop) {
+      width: clamp(30ch, 80%, 70rem);
+    }
   }
 
   &__mail {
@@ -222,6 +225,10 @@ const socialLinks = [
     font-family: var(--font-system);
     font-weight: 400;
     line-height: 1.5;
+
+    a {
+      color: inherit;
+    }
   }
 
   &__emoji {

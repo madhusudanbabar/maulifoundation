@@ -93,6 +93,37 @@
         </div>
       </div>
     </section>
+    <section class="container-fluid call">
+      <h2 class="call__heading">Be the change!</h2>
+      <p class="call__meta">
+        At Mauli Foundation, our mission thrives on the generosity and
+        compassion of people like you. Your contribution can make a significant
+        impact on the lives of the most vulnerable members of our society. Join
+        us in our journey of empowerment, transformation, and positive change.
+      </p>
+      <div class="call__blocks">
+        <div class="call__block">
+          <h3 class="call__head">Become a Volunteer</h3>
+          <p class="call__info">
+            Are you passionate about making a difference? Join our team of
+            dedicated volunteers and be a guiding light for those in need. Your
+            time, skills, and support can create a ripple effect of change that
+            extends far beyond the present moment.
+          </p>
+          <a href="#" class="cta call__cta">Join Us</a>
+        </div>
+        <div class="call__block">
+          <h3 class="call__head">Make a Donation</h3>
+          <p class="call__info">
+            Your contribution, no matter the size, can change lives. By making a
+            donation, you directly contribute to providing shelter, education,
+            mental health support, and nutritious meals to those who need it the
+            most. Every donation counts in building a better future.
+          </p>
+          <a href="#" class="cta call__cta">Donate Now</a>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 <script>
@@ -264,7 +295,7 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    color: #e9ddd3;
+    color: $subtle-peach;
     padding: clamp(2rem, 7.5vmax, 5rem);
     padding-inline: 0rem;
     width: clamp(30rem, 100%, 50rem);
@@ -298,10 +329,8 @@ export default {
   }
 
   &__title {
-    font-size: 4rem;
-    text-align: center;
+    @extend %heading;
     margin-block: 1rem 15rem;
-    font-family: var(--font-system);
   }
 
   &__grid {
@@ -427,6 +456,78 @@ export default {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 8rem 4rem;
+  }
+}
+
+.call {
+  padding: 7vh 7.5vw 10rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+
+  &__heading {
+    @extend %heading;
+    margin-block: 0rem;
+  }
+
+  &__meta {
+    line-height: 1.5;
+    font-size: 1.6rem;
+    margin-block-end: 5rem;
+    hyphens: auto;
+
+    @include respond(desktop) {
+      font-size: 1.8rem;
+      max-width: 110rem;
+      margin-inline: auto;
+      text-align: center;
+      hyphens: none;
+    }
+  }
+
+  &__blocks {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    gap: 5rem;
+  }
+
+  &__block {
+    max-width: 55rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2.5rem 3.5rem;
+    border-radius: 0.5rem;
+    backdrop-filter: contrast(0.9);
+    transition: backdrop-filter 0.3s ease-out;
+
+    &:hover {
+      backdrop-filter: contrast(0.8);
+    }
+  }
+
+  &__head {
+    @extend %heading;
+    font-size: 2.25rem;
+    text-align: left;
+
+    @include respond(desktop) {
+      font-size: 3rem;
+    }
+  }
+
+  &__info {
+    font-family: Inter;
+    font-weight: 400;
+    line-height: 150%;
+  }
+
+  a.call__cta {
+    margin-left: 0;
+    align-self: flex-start;
+    margin-top: auto;
   }
 }
 </style>
