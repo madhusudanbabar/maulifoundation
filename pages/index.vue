@@ -53,17 +53,16 @@
         </div>
       </div>
     </section>
-    <section class="container-fluid work">
-      <!-- <h3 class="work__subtitle">What We Do?</h3> -->
-      <h2 class="work__title">What We Do?</h2>
-      <div class="work__grid">
-        <div class="work__block" v-for="w in work">
-          <div class="work__row">
-            <font-awesome-icon class="work__icon" :icon="['fas', w.icon]" />
-            <span class="work__heading">{{ w.title }}</span>
-          </div>
-          <p class="work__meta">{{ w.description }}</p>
-        </div>
+    <section class="container-fluid feature">
+      <h2 class="feature__heading">Featured In</h2>
+      <div class="feature__marquee" :style="{ '--articles': news.length }">
+        <figure class="feature__figure" v-for="n in news">
+          <nuxt-img
+            class="feature__news"
+            :src="`/images/gallery/news/${n.src}`"
+          />
+          <figcaption class="feature__caption">{{ n.caption }}</figcaption>
+        </figure>
       </div>
     </section>
     <section class="container-fluid fact">
@@ -92,6 +91,30 @@
           <div class="fact__count" data-counter="volunteers">15+</div>
           <span class="fact__desc">Volunteer Impact</span>
         </div>
+      </div>
+    </section>
+    <section class="container-fluid work">
+      <!-- <h3 class="work__subtitle">What We Do?</h3> -->
+      <h2 class="work__title">What We Do?</h2>
+      <div class="work__grid">
+        <div class="work__block" v-for="w in work">
+          <div class="work__row">
+            <font-awesome-icon class="work__icon" :icon="['fas', w.icon]" />
+            <span class="work__heading">{{ w.title }}</span>
+          </div>
+          <p class="work__meta">{{ w.description }}</p>
+        </div>
+      </div>
+    </section>
+    <section class="container-fluid gallery">
+      <h2 class="gallery__title">Gallery of hope</h2>
+      <div class="gallery__grid">
+        <nuxt-img
+          v-for="i in gallery"
+          width="1000"
+          class="gallery__img"
+          :src="`/images/gallery/${i}`"
+        />
       </div>
     </section>
     <section class="container-fluid call">
@@ -125,19 +148,9 @@
         </div>
       </div>
     </section>
-    <section class="container-fluid gallery">
-      <h2 class="gallery__title">Gallery of hope</h2>
-      <div class="gallery__grid">
-        <nuxt-img
-          v-for="i in gallery"
-          width="1000"
-          class="gallery__img"
-          :src="`/images/gallery/${i}`"
-        />
-      </div>
-    </section>
   </div>
 </template>
+
 <script>
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -217,8 +230,22 @@ export default {
       "volunteers with orphan.jpeg",
       "volunteers.jpeg",
     ];
+    const news = [
+      {
+        src: "article 1.jpeg",
+        caption: "Veerbhumi Newspaper",
+      },
+      {
+        src: "article 2.jpeg",
+        caption: "Prabhat Newspaper",
+      },
+      {
+        src: "article 3.jpeg",
+        caption: "Prabhat Newspaper",
+      },
+    ];
     let ctx;
-    return { work, gallery, counterItems, ctx };
+    return { work, gallery, counterItems, ctx, news };
   },
   methods: {
     animateCounters() {
@@ -250,7 +277,21 @@ export default {
   },
 };
 </script>
+
 <style lang="scss">
+%padding {
+  padding: 7vh 7.5vw 10rem;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
 .hero {
   min-height: 100vh;
   display: flex;
@@ -314,7 +355,7 @@ export default {
 .bio {
   display: flex;
   gap: 2.5rem;
-  max-width: 115rem;
+  max-width: 120rem;
   flex-direction: column;
   justify-content: space-between;
 
@@ -328,9 +369,9 @@ export default {
     flex-direction: column;
     gap: 1rem;
     color: $subtle-peach;
-    padding: clamp(2rem, 7.5vmax, 5rem);
+    padding-block: clamp(2rem, 2.5vmax, 5rem);
     padding-inline: 0rem;
-    width: clamp(30rem, 100%, 50rem);
+    max-width: 55rem;
   }
 
   &__heading {
@@ -345,14 +386,13 @@ export default {
   &__desc {
     font-family: Inter;
     font-size: 1.65rem;
-    line-height: 1.65;
+    line-height: 1.5;
     margin-bottom: 2rem;
   }
 }
 
 .work {
-  padding: 7vh 7.5vw 10rem;
-
+  @extend %padding;
   &__subtitle {
     text-align: center;
     font-family: var(--font-system);
@@ -492,7 +532,7 @@ export default {
 }
 
 .call {
-  padding: 7vh 7.5vw 10rem;
+  @extend %padding;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -521,8 +561,12 @@ export default {
   &__blocks {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-between;
+    justify-content: center;
     gap: 5rem;
+
+    @include respond(desktop) {
+      justify-content: space-between;
+    }
   }
 
   &__block {
@@ -565,7 +609,7 @@ export default {
 
 .gallery {
   background: $violet-darker;
-  padding: 7vh 7.5vw 10rem;
+  @extend %padding;
 
   &__title {
     @extend %heading;
@@ -638,6 +682,45 @@ export default {
         grid-column: span 3;
       }
     }
+  }
+}
+
+.feature {
+  @extend %padding;
+  padding-inline: 5rem;
+  overflow-x: hidden;
+  --gap: 2rem;
+
+  &__heading {
+    @extend %heading;
+    padding-block: 2rem 5rem;
+  }
+
+  &__marquee {
+    display: flex;
+    flex-flow: row wrap;
+    gap: var(--gap);
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  &__figure {
+    @include respond(desktop) {
+      flex-basis: calc(
+        (100% - var(--gap) * (var(--articles) - 1)) / var(--articles)
+      );
+    }
+  }
+
+  &__caption {
+    text-align: center;
+    padding-block: 1rem;
+  }
+
+  &__news {
+    width: 100%;
+    border-radius: 0.5rem;
+    height: calc(100% - (2rem * 2) - 1em);
   }
 }
 </style>
